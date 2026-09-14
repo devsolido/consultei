@@ -735,9 +735,24 @@
     background: #e0f2fe;
     color: #0f172a;
     border: 1px solid #bae6fd;
-    margin-bottom: 10px;
+    min-height: 46px;
   }
   .btn-finalizar { background: #059669; color: #fff; }
+  .manual-home-btn {
+    width: 100%;
+    margin: 10px 0 0;
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    min-height: 48px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+    touch-action: manipulation;
+  }
+  .manual-home-btn:active { transform: scale(.98); }
 
   .vazio {
     text-align: center;
@@ -1002,6 +1017,7 @@
       <input id="busca" type="search" placeholder="Buscar produto..." autocomplete="off" enterkeyhint="search" inputmode="search">
       <button class="clear" id="btn-limpar-busca" aria-label="Limpar busca">✕</button>
     </div>
+    <button class="manual-home-btn" id="btn-manual" type="button">＋ Adicionar item manual</button>
   </div>
 </header>
 
@@ -1056,12 +1072,9 @@
       </div>
     </div>
 
-    <div class="btns-acao" style="display:block;">
-      <button class="btn-manual" id="btn-manual">+ Adicionar item manual</button>
-      <div style="display:flex; gap:10px; margin-top:10px;">
-        <button class="btn-limpar" id="btn-limpar">Limpar</button>
-        <button class="btn-finalizar" id="btn-finalizar">Finalizar</button>
-      </div>
+    <div class="btns-acao">
+      <button class="btn-limpar" id="btn-limpar">Limpar</button>
+      <button class="btn-finalizar" id="btn-finalizar">Finalizar</button>
     </div>
   </div>
 </div>
