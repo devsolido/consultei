@@ -30,6 +30,8 @@
   }
   body {
     padding-bottom: calc(90px + env(safe-area-inset-bottom));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
     -webkit-text-size-adjust: 100%;
     min-height: 100vh;
   }
@@ -43,7 +45,7 @@
     z-index: 10;
     background: linear-gradient(135deg, #155dfc 0%, #0d47c7 100%);
     color: #fff;
-    padding: calc(10px + env(safe-area-inset-top)) 14px 12px;
+    padding: calc(10px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 12px calc(14px + env(safe-area-inset-left));
     box-shadow: 0 2px 12px rgba(0,0,0,.15);
   }
   .header-inner { max-width: 1200px; margin: 0 auto; }
@@ -156,7 +158,11 @@
   }
 
   /* ==================== RESULTADOS ==================== */
-  main { padding: 10px 12px; max-width: 1200px; margin: 0 auto; }
+  main {
+    padding: 10px calc(12px + env(safe-area-inset-right)) 10px calc(12px + env(safe-area-inset-left));
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
   .status {
     text-align: center;
@@ -173,6 +179,167 @@
     grid-template-columns: 1fr;
     gap: 10px;
   }
+
+  @media (max-width: 480px) {
+    header {
+      padding-left: calc(10px + env(safe-area-inset-left));
+      padding-right: calc(10px + env(safe-area-inset-right));
+    }
+    header h1 {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .search-row input {
+      min-height: 48px;
+      font-size: 16px;
+      padding: 13px 38px 13px 14px;
+    }
+    .search-row .clear {
+      width: 28px;
+      height: 28px;
+      right: 9px;
+    }
+    main {
+      padding: 8px calc(10px + env(safe-area-inset-right)) 8px calc(10px + env(safe-area-inset-left));
+    }
+    .status {
+      padding: 24px 12px;
+      font-size: 13px;
+    }
+    .grid-produtos {
+      gap: 8px;
+    }
+    .produto {
+      padding: 10px;
+      gap: 10px;
+      align-items: center;
+    }
+    .produto img {
+      width: 66px;
+      height: 66px;
+    }
+    .produto .info {
+      min-width: 0;
+    }
+    .produto .nome {
+      font-size: 13px;
+      -webkit-line-clamp: 3;
+    }
+    .produto .meta,
+    .produto .local {
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+    .produto .preco { font-size: 17px; }
+    .produto .acoes {
+      width: 54px;
+      flex-shrink: 0;
+    }
+    .produto .add-btn,
+    .produto .add-qtd-btn {
+      width: 100%;
+      min-height: 42px;
+    }
+    .produto .add-btn {
+      font-size: 24px;
+    }
+    .carrinho-fab {
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      padding: 12px 16px;
+      font-size: 14px;
+      gap: 8px;
+    }
+    .aviso-teto {
+      margin: 10px 10px 0;
+      padding: 10px 12px;
+    }
+    .sheet-header,
+    .item-carrinho,
+    .sheet-footer {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+    .item-carrinho {
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .item-carrinho .nome {
+      min-width: 0;
+      flex: 1 1 100%;
+    }
+    .item-carrinho .qtd-ctrl {
+      margin-left: auto;
+    }
+    .item-carrinho .subtotal {
+      min-width: 58px;
+      font-size: 13px;
+    }
+    .totais .valor {
+      font-size: 20px;
+    }
+    .btns-acao {
+      gap: 8px;
+    }
+    .btns-acao button {
+      padding: 12px 8px;
+      font-size: 13px;
+      min-height: 46px;
+    }
+    .modal-box {
+      padding: 16px;
+      border-radius: 14px;
+    }
+    .modal-box input,
+    .modal-box textarea {
+      font-size: 16px;
+      min-height: 48px;
+      margin-bottom: 12px;
+    }
+    .modal-box .btns button {
+      min-height: 44px;
+    }
+    .checkout-actions {
+      grid-template-columns: 1fr;
+    }
+    .checkout-actions .btn-voltar {
+      grid-column: auto;
+    }
+    .checkout-actions button {
+      min-height: 46px;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .produto {
+      flex-wrap: wrap;
+    }
+    .produto .info {
+      flex: 1 1 100%;
+    }
+    .produto .acoes {
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+    .produto .add-btn {
+      flex: 1;
+    }
+    .search-row input {
+      font-size: 15px;
+      padding-right: 34px;
+    }
+    .search-row .clear {
+      width: 26px;
+      height: 26px;
+    }
+    .sheet-header h2 {
+      font-size: 16px;
+    }
+  }
+
   @media (min-width: 768px) {
     .grid-produtos { grid-template-columns: 1fr 1fr; gap: 12px; }
     main { padding: 16px 20px; }
@@ -376,7 +543,7 @@
     max-height: 88vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
   }
   .sheet.aberto { transform: translateY(0); }
   @media (min-width: 768px) {
@@ -583,7 +750,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
     overflow-y: auto;
   }
   .modal.visivel { display: flex; }
@@ -925,9 +1092,6 @@
     <label for="co-nome">Nome (opcional)</label>
     <input id="co-nome" type="text" placeholder="Seu nome" autocomplete="name">
 
-    <label for="co-doc">CPF/CNPJ (opcional)</label>
-    <input id="co-doc" type="text" placeholder="000.000.000-00" inputmode="numeric" autocomplete="off">
-
     <label for="co-obs">Observações (opcional)</label>
     <textarea id="co-obs" placeholder="Ex: compra do mês, lista da semana..."></textarea>
 
@@ -958,7 +1122,7 @@
 const ENDPOINT = 'https://app.mateusmais.com.br/api/products/internal/v1/service/*/queries';
 const INDEX = 'SHOWCASE_catalog_product_api_index_PROD';
 const LOJA_PADRAO = '14ae828b-491f-42fc-8247-5089f6613750';
-const LOJA_NOME = 'Mateus Mais Express⚡️';
+const LOJA_NOME = 'Mix Mateus Cidade Nova';
 const LIMITE = 20;
 const CACHE_MIN = 10;
 const TETO = 900;
@@ -1671,7 +1835,6 @@ function gerarPDF() {
     const horaStr = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
     const nome = document.getElementById('co-nome').value.trim();
-    const docCli = document.getElementById('co-doc').value.trim();
     const obs = document.getElementById('co-obs').value.trim();
 
     // ----- Cabeçalho -----
@@ -1700,8 +1863,6 @@ function gerarPDF() {
     doc.setFontSize(10);
     doc.setTextColor(75, 85, 99);
     doc.text(`Nome: ${nome || '(não informado)'}`, 14, y);
-    y += 5;
-    doc.text(`CPF/CNPJ: ${docCli || '(não informado)'}`, 14, y);
     y += 5;
     doc.text(`Loja: ${LOJA_NOME}`, 14, y);
     y += 8;
