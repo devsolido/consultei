@@ -731,6 +731,12 @@
   }
   .btns-acao button:active { transform: scale(.98); }
   .btn-limpar { background: #f3f4f6; color: #6b7280; }
+  .btn-manual {
+    background: #e0f2fe;
+    color: #0f172a;
+    border: 1px solid #bae6fd;
+    margin-bottom: 10px;
+  }
   .btn-finalizar { background: #059669; color: #fff; }
 
   .vazio {
@@ -1050,9 +1056,12 @@
       </div>
     </div>
 
-    <div class="btns-acao">
-      <button class="btn-limpar" id="btn-limpar">Limpar</button>
-      <button class="btn-finalizar" id="btn-finalizar">Finalizar</button>
+    <div class="btns-acao" style="display:block;">
+      <button class="btn-manual" id="btn-manual">+ Adicionar item manual</button>
+      <div style="display:flex; gap:10px; margin-top:10px;">
+        <button class="btn-limpar" id="btn-limpar">Limpar</button>
+        <button class="btn-finalizar" id="btn-finalizar">Finalizar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1079,6 +1088,28 @@
     <div class="btns">
       <button class="btn-cancelar" id="modal-preco-cancelar">Cancelar</button>
       <button class="btn-confirmar" id="modal-preco-confirmar">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL ITEM MANUAL ==================== -->
+<div class="modal" id="modal-manual">
+  <div class="modal-box">
+    <h3>➕ Adicionar item manual</h3>
+    <div class="subtitulo">Produto não encontrado na base, insira os dados para adicionar ao carrinho.</div>
+
+    <label for="manual-nome">Nome do item</label>
+    <input id="manual-nome" type="text" placeholder="Ex: Feijão 5kg" autocomplete="off">
+
+    <label for="manual-preco">Valor unitário</label>
+    <input id="manual-preco" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0,00">
+
+    <label for="manual-qtd">Quantidade</label>
+    <input id="manual-qtd" type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*">
+
+    <div class="btns">
+      <button class="btn-cancelar" id="modal-manual-cancelar">Cancelar</button>
+      <button class="btn-confirmar" id="modal-manual-confirmar">Adicionar</button>
     </div>
   </div>
 </div>
@@ -1704,6 +1735,82 @@ if (elHandle) {
 // ============ BOTÕES ============
 document.getElementById('btn-limpar').addEventListener('click', limparCarrinho);
 document.getElementById('btn-finalizar').addEventListener('click', abrirCheckout);
+
+// ============ ITEM MANUAL ============
+const elModalManual = document.getElementById('modal-manual');
+const elManualNome = document.getElementById('manual-nome');
+const elManualPreco = document.getElementById('manual-preco');
+const elManualQtd = document.getElementById('manual-qtd');
+
+function abrirModalManual() {
+  elManualNome.value = '';
+  elManualPreco.value = '';
+  elManualQtd.value = '1';
+  elModalManual.classList.add('visivel');
+  setTimeout(() => elManualNome.focus(), 100);
+}
+
+function fecharModalManual() {
+  elModalManual.classList.remove('visivel');
+}
+
+document.getElementById('btn-manual').addEventListener('click', abrirModalManual);
+document.getElementById('modal-manual-cancelar').addEventListener('click', fecharModalManual);
+document.getElementById('modal-manual-confirmar').addEventListener('click', () => {
+  const nome = elManualNome.value.trim();
+  const preco = parseFloat(String(elManualPreco.value).replace(',', '.'));
+  const qtd = parseInt(elManualQtd.value, 10);
+
+  if (!nome) {
+    toast('Digite o nome do item');
+    elManualNome.focus();
+    return;
+  }
+
+  if (Number.isNaN(preco) || preco < 0) {
+    toast('Digite um valor válido');
+    elManualPreco.focus();
+    return;
+  }
+
+  if (!Number.isInteger(qtd) || qtd < 1) {
+    toast('Digite uma quantidade válida');
+    elManualQtd.focus();
+    return;
+  }
+
+  const novoItem = {
+    ean: `manual-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+    nome,
+    preco,
+    qtd,
+    imagem: '',
+    local: 'Adicionado manualmente',
+    precoEditado: true,
+    manual: true,
+  };
+
+  carrinho.push(novoItem);
+  salvarCarrinho();
+  renderCarrinho();
+  fecharModalManual();
+  abrirSheet();
+  vibrar(35);
+  toast(`✓ ${nome.slice(0, 24)} (${qtd}x)`);
+});
+
+elModalManual.addEventListener('click', e => {
+  if (e.target === elModalManual) fecharModalManual();
+});
+elManualNome.addEventListener('keydown', e => {
+  if (e.key === 'Enter') elManualPreco.focus();
+});
+elManualPreco.addEventListener('keydown', e => {
+  if (e.key === 'Enter') elManualQtd.focus();
+});
+elManualQtd.addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('modal-manual-confirmar').click();
+});
 
 // ============ CHECKOUT ============
 const elModalCheckout = document.getElementById('modal-checkout');
