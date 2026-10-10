@@ -171,7 +171,7 @@
     font-size: 14px;
     line-height: 1.5;
   }
-  .status.error { color: #dc2626; }
+  .status.error { color: #b91c1c; }
   .status .emoji { font-size: 32px; display: block; margin-bottom: 8px; }
 
   .grid-produtos {
@@ -790,7 +790,7 @@
     from { opacity: 0; transform: scale(.95); }
     to   { opacity: 1; transform: scale(1); }
   }
-  .modal-box h3 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+  .modal-box h2 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
   .modal-box .subtitulo {
     font-size: 12px;
     color: #6b7280;
@@ -1019,10 +1019,10 @@
     --forest: #173e32;
     --forest-deep: #102f27;
     --lime: #d8ef78;
-    --coral: #d95f3f;
+    --coral: #b5442a;
     --paper: #f2f6ef;
     --ink: #1c2d27;
-    --muted: #68776f;
+    --muted: #59665f;
     --line: #dce5da;
   }
   html, body {
@@ -1121,7 +1121,7 @@
     border-radius: 10px;
     box-shadow: 0 18px 48px rgba(16,47,39,.2);
   }
-  .modal-box h3 { color: var(--forest); font-family: Georgia, "Times New Roman", serif; }
+  .modal-box h2 { color: var(--forest); font-family: Georgia, "Times New Roman", serif; }
   .modal-box input, .modal-box textarea { border-radius: 7px; border-color: var(--line); }
   .modal-box input:focus, .modal-box textarea:focus { border-color: var(--forest); }
   .modal-box .btn-cancelar { background: #edf2e9; color: var(--forest); }
@@ -1149,6 +1149,78 @@
     font-size: 11px;
     font-weight: 700;
   }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  .skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 200;
+    padding: 12px 16px;
+    transform: translateY(-160%);
+    border-radius: 6px;
+    background: var(--lime);
+    color: var(--forest-deep);
+    font-weight: 700;
+  }
+  .skip-link:focus { transform: translateY(0); }
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 3px solid var(--coral);
+    outline-offset: 3px;
+  }
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--coral);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px #fff;
+  }
+  .search-row input::placeholder,
+  .modal-box input::placeholder,
+  .modal-box textarea::placeholder { color: #59665f; opacity: 1; }
+  .produto .preco-cheio,
+  .item-carrinho .nome small { color: #59665f; }
+  .item-carrinho .nome .preco-editado,
+  .item-carrinho .btn-editar-preco { color: #8c4a00; }
+  .economia,
+  .checkout-resumo .linha span[style] { color: #067647 !important; }
+  .campo-erro {
+    display: block;
+    margin: -8px 0 12px;
+    color: #922b21;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .campo-erro:empty { display: none; }
+  .vazio { color: var(--muted); }
+  .sem-estoque {
+    display: grid;
+    width: 100%;
+    min-height: 44px;
+    place-items: center;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
 
   @media (max-width: 600px) {
     body {
@@ -1163,6 +1235,8 @@
     .brand-mark { width: 36px; height: 36px; flex-basis: 36px; font-size: 18px; }
     header h1 { font-size: 22px; }
     .search-row input { min-height: 48px; font-size: 16px; }
+    .search-row .clear { width: 44px; height: 44px; right: 3px; }
+    .sheet-header .close { min-width: 44px; min-height: 44px; padding: 4px; }
     .manual-home-btn { min-height: 44px; margin-top: 8px; }
     main { padding-top: 12px; }
     .grid-produtos { gap: 8px; }
@@ -1182,9 +1256,9 @@
     }
     .sheet-lista { min-height: 0; overscroll-behavior: contain; }
     .item-carrinho { align-items: center; font-size: 14px; }
-    .item-carrinho .qtd-ctrl button { width: 40px; height: 40px; }
+    .item-carrinho .qtd-ctrl button { width: 44px; height: 44px; }
     .item-carrinho .qtd-ctrl span { min-width: 30px; }
-    .item-carrinho .btn-editar-preco { min-width: 40px; min-height: 40px; }
+    .item-carrinho .btn-editar-preco { min-width: 44px; min-height: 44px; }
     .sheet-footer { padding-bottom: 12px; }
     .modal {
       align-items: flex-start;
@@ -1206,7 +1280,7 @@
   @media (max-width: 380px) {
     .produto {
       display: grid;
-      grid-template-columns: 52px minmax(0, 1fr) 42px;
+      grid-template-columns: 52px minmax(0, 1fr) 44px;
       align-items: start;
       gap: 8px;
       padding: 9px;
@@ -1215,14 +1289,14 @@
     .produto .info { min-width: 0; }
     .produto .nome { font-size: 13px; -webkit-line-clamp: 4; }
     .produto .acoes {
-      width: 42px;
+      width: 44px;
       flex-direction: column;
       align-self: start;
       gap: 6px;
     }
     .produto .add-btn,
-    .produto .add-qtd-btn { width: 42px; min-height: 42px; }
-    .produto .add-btn { flex: 0 0 42px; font-size: 22px; }
+    .produto .add-qtd-btn { width: 44px; min-height: 44px; }
+    .produto .add-btn { flex: 0 0 44px; font-size: 22px; }
     .produto .add-qtd-btn { font-size: 11px; }
     .produto .preco-row { column-gap: 6px; row-gap: 4px; }
     .produto .preco { font-size: 16px; }
@@ -1236,6 +1310,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#resultados">Pular para o conteúdo principal</a>
 
 <!-- ==================== HEADER ==================== -->
 <header>
@@ -1247,7 +1322,8 @@
         <h1>Rota <span>&amp;</span> Conta</h1>
       </div>
     </div>
-    <div class="search-row">
+    <div class="search-row" role="search" aria-label="Busca de produtos">
+      <label class="sr-only" for="busca">Nome do produto</label>
       <input id="busca" type="search" placeholder="Buscar produto..." autocomplete="off" enterkeyhint="search" inputmode="search">
       <button class="clear" id="btn-limpar-busca" aria-label="Limpar busca">✕</button>
     </div>
@@ -1257,47 +1333,48 @@
 
 <!-- ==================== AVISO DE TETO ==================== -->
 <div style="max-width:1200px;margin:0 auto;">
-  <div class="aviso-teto" id="aviso-teto"></div>
+  <div class="aviso-teto" id="aviso-teto" aria-live="polite" aria-atomic="false"></div>
 </div>
 
 <!-- ==================== RESULTADOS ==================== -->
-<main id="resultados">
-  <div class="status">
+<main id="resultados" tabindex="-1">
+  <div class="status" role="status">
     <span class="emoji">🔍</span>
     Digite o nome do produto pra começar
   </div>
 </main>
+<div id="anuncio-busca" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <!-- ==================== FAB CARRINHO ==================== -->
-<button class="carrinho-fab" id="carrinho-fab" aria-label="Abrir carrinho">
+<button class="carrinho-fab" id="carrinho-fab" aria-label="Abrir carrinho" aria-controls="sheet" aria-expanded="false">
   <span>🛒</span>
   <span id="fab-total">R$ 0,00</span>
   <span class="badge-qtd" id="fab-qtd">0</span>
 </button>
 
 <!-- ==================== SHEET CARRINHO ==================== -->
-<div class="overlay" id="overlay"></div>
-<div class="sheet" id="sheet">
-  <div class="sheet-handle"></div>
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true" inert>
+  <div class="sheet-handle" aria-hidden="true"></div>
   <div class="sheet-header">
-    <h2>🛒 Carrinho</h2>
+    <h2 id="sheet-title">🛒 Carrinho</h2>
     <button class="close" id="sheet-fechar" aria-label="Fechar">✕</button>
   </div>
-  <div class="sheet-lista" id="carrinho-lista">
-    <div class="vazio">
+  <div class="sheet-lista" id="carrinho-lista" role="list" aria-label="Itens do carrinho">
+    <div class="vazio" role="status">
       <span class="emoji">🛒</span>
       Carrinho vazio
     </div>
   </div>
   <div class="sheet-footer">
     <div class="totais">
-      <span class="label">Total</span>
-      <span class="valor" id="total-carrinho">R$ 0,00</span>
+      <span class="label">Total da compra</span>
+      <span class="valor" id="total-carrinho" aria-live="polite" aria-atomic="true">R$ 0,00</span>
     </div>
     <div class="economia" id="economia-carrinho"></div>
 
     <div class="progresso-cota">
-      <div class="barra">
+      <div class="barra" role="progressbar" aria-label="Valor da compra em relação à cota de R$ 900,00" aria-valuemin="0" aria-valuemax="900" aria-valuenow="0" aria-valuetext="R$ 0,00 de R$ 900,00">
         <div class="preenchido" id="progresso-barra" style="width:0%"></div>
       </div>
       <div class="legenda">
@@ -1314,11 +1391,13 @@
 </div>
 
 <!-- ==================== MODAL QUANTIDADE ==================== -->
-<div class="modal" id="modal-qtd">
+<div class="modal" id="modal-qtd" role="dialog" aria-modal="true" aria-labelledby="modal-qtd-titulo" aria-describedby="modal-qtd-produto" aria-hidden="true" inert>
   <div class="modal-box">
-    <h3>Quantas unidades?</h3>
+    <h2 id="modal-qtd-titulo">Quantas unidades?</h2>
     <div class="subtitulo" id="modal-qtd-produto"></div>
-    <input id="modal-qtd-input" type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*">
+    <label class="sr-only" for="modal-qtd-input">Quantidade a adicionar</label>
+    <input id="modal-qtd-input" type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*" required aria-describedby="modal-qtd-input-erro">
+    <span class="campo-erro" id="modal-qtd-input-erro" role="alert" aria-atomic="true"></span>
     <div class="btns">
       <button class="btn-cancelar" id="modal-qtd-cancelar">Cancelar</button>
       <button class="btn-confirmar" id="modal-qtd-confirmar">Adicionar</button>
@@ -1327,11 +1406,13 @@
 </div>
 
 <!-- ==================== MODAL PREÇO ==================== -->
-<div class="modal" id="modal-preco">
+<div class="modal" id="modal-preco" role="dialog" aria-modal="true" aria-labelledby="modal-preco-titulo" aria-describedby="modal-preco-produto" aria-hidden="true" inert>
   <div class="modal-box">
-    <h3>Editar preço</h3>
+    <h2 id="modal-preco-titulo">Editar preço</h2>
     <div class="subtitulo" id="modal-preco-produto"></div>
-    <input id="modal-preco-input" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0,00">
+    <label class="sr-only" for="modal-preco-input">Novo preço unitário</label>
+    <input id="modal-preco-input" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0,00" required aria-describedby="modal-preco-input-erro">
+    <span class="campo-erro" id="modal-preco-input-erro" role="alert" aria-atomic="true"></span>
     <div class="btns">
       <button class="btn-cancelar" id="modal-preco-cancelar">Cancelar</button>
       <button class="btn-confirmar" id="modal-preco-confirmar">Salvar</button>
@@ -1340,19 +1421,22 @@
 </div>
 
 <!-- ==================== MODAL ITEM MANUAL ==================== -->
-<div class="modal" id="modal-manual">
+<div class="modal" id="modal-manual" role="dialog" aria-modal="true" aria-labelledby="modal-manual-titulo" aria-describedby="modal-manual-descricao" aria-hidden="true" inert>
   <div class="modal-box">
-    <h3>➕ Adicionar item manual</h3>
-    <div class="subtitulo">Produto não encontrado na base, insira os dados para adicionar ao carrinho.</div>
+    <h2 id="modal-manual-titulo">➕ Adicionar item manual</h2>
+    <div class="subtitulo" id="modal-manual-descricao">Produto não encontrado na base, insira os dados para adicionar ao carrinho.</div>
 
     <label for="manual-nome">Nome do item</label>
-    <input id="manual-nome" type="text" placeholder="Ex: Feijão 5kg" autocomplete="off">
+    <input id="manual-nome" type="text" placeholder="Ex: Feijão 5kg" autocomplete="off" required aria-describedby="manual-nome-erro">
+    <span class="campo-erro" id="manual-nome-erro" role="alert" aria-atomic="true"></span>
 
     <label for="manual-preco">Valor unitário</label>
-    <input id="manual-preco" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0,00">
+    <input id="manual-preco" type="number" step="0.01" min="0" inputmode="decimal" placeholder="0,00" required aria-describedby="manual-preco-erro">
+    <span class="campo-erro" id="manual-preco-erro" role="alert" aria-atomic="true"></span>
 
     <label for="manual-qtd">Quantidade</label>
-    <input id="manual-qtd" type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*">
+    <input id="manual-qtd" type="number" min="1" value="1" inputmode="numeric" pattern="[0-9]*" required aria-describedby="manual-qtd-erro">
+    <span class="campo-erro" id="manual-qtd-erro" role="alert" aria-atomic="true"></span>
 
     <div class="btns">
       <button class="btn-cancelar" id="modal-manual-cancelar">Cancelar</button>
@@ -1362,16 +1446,16 @@
 </div>
 
 <!-- ==================== MODAL CHECKOUT ==================== -->
-<div class="modal" id="modal-checkout">
+<div class="modal" id="modal-checkout" role="dialog" aria-modal="true" aria-labelledby="modal-checkout-titulo" aria-describedby="checkout-desc co-resumo" aria-hidden="true" inert>
   <div class="modal-box checkout">
-    <h3>✅ Finalizar compra</h3>
-    <div class="subtitulo">Confira os dados e gere o comprovante em PDF</div>
+    <h2 id="modal-checkout-titulo">✅ Finalizar compra</h2>
+    <div class="subtitulo" id="checkout-desc">Confira os dados e gere o comprovante em PDF</div>
 
     <label for="co-obs">Observações (opcional)</label>
     <textarea id="co-obs" placeholder="Ex: compra do mês, lista da semana..."></textarea>
 
-    <div class="checkout-resumo" id="co-resumo"></div>
-    <div class="cota-box" id="co-cota"></div>
+    <div class="checkout-resumo" id="co-resumo" role="group" aria-label="Resumo da compra"></div>
+    <div class="cota-box" id="co-cota" role="status" aria-live="polite" aria-atomic="true"></div>
 
     <div class="checkout-actions">
       <button class="btn-voltar" id="co-voltar">← Voltar ao carrinho</button>
@@ -1381,7 +1465,7 @@
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <footer class="app-footer">Feito por Igor Veras Morais - IFPA - Campus Marabá Industrial</footer>
 
 <script>
@@ -1553,6 +1637,8 @@ const elOverlay = document.getElementById('overlay');
 const elAvisoTeto = document.getElementById('aviso-teto');
 const elProgressoBarra = document.getElementById('progresso-barra');
 const elProgressoLabel = document.getElementById('progresso-label');
+const elProgresso = elProgressoBarra.parentElement;
+const elAnuncioBusca = document.getElementById('anuncio-busca');
 
 // ============ HELPERS ============
 function fmt(n) {
@@ -1576,6 +1662,19 @@ function lerPreco(input) {
   if (!input.checkValidity()) return null;
   const preco = parseFloat(String(input.value).replace(',', '.'));
   return Number.isFinite(preco) && preco >= 0 ? emCentavos(preco) / 100 : null;
+}
+
+function limparErroCampo(input) {
+  input.removeAttribute('aria-invalid');
+  const erro = document.getElementById(`${input.id}-erro`);
+  if (erro) erro.textContent = '';
+}
+
+function mostrarErroCampo(input, mensagem) {
+  input.setAttribute('aria-invalid', 'true');
+  const erro = document.getElementById(`${input.id}-erro`);
+  if (erro) erro.textContent = mensagem;
+  input.focus();
 }
 
 function unidadesPorPacote(nome) {
@@ -1696,6 +1795,11 @@ function vibrar(ms) {
 }
 
 let toastTimer;
+function anunciarBusca(mensagem) {
+  elAnuncioBusca.textContent = '';
+  requestAnimationFrame(() => { elAnuncioBusca.textContent = mensagem; });
+}
+
 function toast(msg) {
   const el = document.getElementById('toast');
   if (!el) return;
@@ -1705,10 +1809,77 @@ function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
 }
 
+const focoAnteriorDialogo = new WeakMap();
+function abrirDialogo(modal, focoInicial) {
+  focoAnteriorDialogo.set(modal, document.activeElement);
+  if (elSheet.classList.contains('aberto')) elSheet.inert = true;
+  modal.inert = false;
+  modal.removeAttribute('aria-hidden');
+  modal.classList.add('visivel');
+  document.body.style.overflow = 'hidden';
+  const destino = focoInicial || modal.querySelector('input:not([disabled]), textarea:not([disabled]), button:not([disabled])');
+  requestAnimationFrame(() => { if (destino) destino.focus(); });
+}
+
+function fecharDialogo(modal, focoRetorno) {
+  modal.classList.remove('visivel');
+  modal.setAttribute('aria-hidden', 'true');
+  modal.inert = true;
+
+  const sheetAberto = elSheet.classList.contains('aberto');
+  if (sheetAberto) {
+    elSheet.inert = false;
+    document.body.style.overflow = 'hidden';
+  } else if (!document.querySelector('.modal.visivel')) {
+    document.body.style.overflow = '';
+  }
+
+  const destino = focoRetorno || focoAnteriorDialogo.get(modal);
+  if (destino && destino.isConnected && !destino.closest('[inert]')) destino.focus();
+  else if (sheetAberto) document.getElementById('sheet-fechar').focus();
+  else elInput.focus();
+}
+
+function controlarTecladoAcessivel(event) {
+  const modal = document.querySelector('.modal.visivel');
+  const dialogo = modal || (elSheet.classList.contains('aberto') ? elSheet : null);
+  if (dialogo) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      const botaoFechar = dialogo.querySelector('.btn-cancelar, .btn-voltar, .close');
+      if (botaoFechar) botaoFechar.click();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+
+    const seletores = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const focaveis = [...dialogo.querySelectorAll(seletores)].filter(elemento =>
+      !elemento.closest('[inert]') && elemento.getClientRects().length > 0
+    );
+    if (!focaveis.length) {
+      event.preventDefault();
+      return;
+    }
+
+    const primeiro = focaveis[0];
+    const ultimo = focaveis[focaveis.length - 1];
+    if (event.shiftKey && (document.activeElement === primeiro || !dialogo.contains(document.activeElement))) {
+      event.preventDefault();
+      ultimo.focus();
+    } else if (!event.shiftKey && (document.activeElement === ultimo || !dialogo.contains(document.activeElement))) {
+      event.preventDefault();
+      primeiro.focus();
+    }
+    return;
+  }
+}
+
+document.addEventListener('keydown', controlarTecladoAcessivel);
+
 // ============ BUSCA ============
 function renderSkeleton() {
   const html = Array(4).fill(0).map(() => `
-    <div class="skeleton">
+    <div class="skeleton" role="listitem" aria-hidden="true">
       <div class="img"></div>
       <div class="linhas">
         <div class="linha" style="width:80%"></div>
@@ -1717,7 +1888,7 @@ function renderSkeleton() {
       </div>
     </div>
   `).join('');
-  elResultados.innerHTML = `<div class="grid-produtos">${html}</div>`;
+  elResultados.innerHTML = `<div class="grid-produtos" role="list" aria-label="Carregando produtos">${html}</div>`;
 }
 
 function renderResultados(produtos) {
@@ -1731,7 +1902,7 @@ function renderResultados(produtos) {
   }
 
   const cards = analisarPrecos(priorizarProdutosUnitarios(produtos)).map(p => `
-    <div class="produto">
+    <div class="produto" role="listitem">
       ${p.imagem
         ? `<img src="${escapeHtml(p.imagem)}" alt="" loading="lazy" onerror="this.style.opacity=.3">`
         : `<div style="width:80px;height:80px;background:#f9fafb;border-radius:10px;flex-shrink:0;"></div>`}
@@ -1751,19 +1922,17 @@ function renderResultados(produtos) {
         ${p.local ? `<div class="local">📍 <strong>${escapeHtml(encurtarLocal(p.local))}</strong></div>` : ''}
       </div>
       <div class="acoes">
-        <button class="add-btn ${p.disponivel ? '' : 'no-stock'}"
-                ${p.disponivel ? '' : 'disabled'}
-                data-add="${encodeURIComponent(JSON.stringify(p))}"
-                aria-label="Adicionar 1">+</button>
-        <button class="add-qtd-btn ${p.disponivel ? '' : 'no-stock'}"
-                ${p.disponivel ? '' : 'disabled'}
-                data-add-qtd="${encodeURIComponent(JSON.stringify(p))}"
-                aria-label="Escolher quantidade">N</button>
+        ${p.disponivel ? `
+          <button class="add-btn" data-add="${encodeURIComponent(JSON.stringify(p))}"
+            aria-label="Adicionar uma unidade de ${escapeHtml(p.nome)}">+</button>
+          <button class="add-qtd-btn" data-add-qtd="${encodeURIComponent(JSON.stringify(p))}"
+            aria-label="Escolher quantidade de ${escapeHtml(p.nome)}">N</button>
+        ` : '<span class="sem-estoque">Sem estoque</span>'}
       </div>
     </div>
   `).join('');
 
-  elResultados.innerHTML = `<div class="grid-produtos">${cards}</div>`;
+  elResultados.innerHTML = `<div class="grid-produtos" role="list" aria-label="Resultados da busca">${cards}</div>`;
 
   elResultados.querySelectorAll('[data-add]').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1799,11 +1968,13 @@ elInput.addEventListener('input', () => {
   clearTimeout(timerDebounce);
 
   if (termo.length < 2) {
+    elResultados.removeAttribute('aria-busy');
     elResultados.innerHTML = `
       <div class="status">
         <span class="emoji">🔍</span>
         Digite o nome do produto pra começar
       </div>`;
+    anunciarBusca(termo ? 'Digite pelo menos dois caracteres para buscar.' : 'Digite o nome do produto para começar.');
     ultimoTermo = '';
     return;
   }
@@ -1823,26 +1994,37 @@ elBtnClear.addEventListener('click', () => {
   elInput.value = '';
   elBtnClear.classList.remove('visible');
   ultimoTermo = '';
+  elResultados.removeAttribute('aria-busy');
   elResultados.innerHTML = `
     <div class="status">
       <span class="emoji">🔍</span>
       Digite o nome do produto pra começar
     </div>`;
+  anunciarBusca('Busca limpa. Digite o nome do produto para começar.');
   elInput.focus();
 });
 
 async function doBusca(termo, forcar = false) {
   if (!forcar && termo === ultimoTermo && elResultados.querySelector('.produto')) return;
   ultimoTermo = termo;
+  elResultados.setAttribute('aria-busy', 'true');
   renderSkeleton();
   try {
     const produtos = await buscarAPI(termo);
     if (elInput.value.trim() !== termo) return;
+    elResultados.removeAttribute('aria-busy');
     renderResultados(produtos);
+    anunciarBusca(produtos.length
+      ? `${produtos.length} produtos encontrados para ${termo}.`
+      : `Nenhum produto encontrado para ${termo}.`);
   } catch (e) {
-    renderErro(navigator.onLine
+    if (elInput.value.trim() !== termo) return;
+    elResultados.removeAttribute('aria-busy');
+    const mensagem = navigator.onLine
       ? 'Erro ao buscar: ' + e.message
-      : 'Sem conexão. Esta busca ainda não foi salva neste aparelho.');
+      : 'Sem conexão. Esta busca ainda não foi salva neste aparelho.';
+    renderErro(mensagem);
+    anunciarBusca(mensagem);
   }
 }
 
@@ -1868,6 +2050,14 @@ function alterarQtd(ean, delta) {
   if (item.qtd <= 0) carrinho = carrinho.filter(i => i.ean !== ean);
   salvarCarrinho();
   renderCarrinho();
+  if (carrinho.some(i => i.ean === ean)) {
+    const acao = delta > 0 ? 'mais' : 'menos';
+    const botao = [...elLista.querySelectorAll(`[data-${acao}]`)]
+      .find(elemento => elemento.dataset[acao] === ean);
+    if (botao) botao.focus();
+  } else {
+    document.getElementById('sheet-fechar').focus();
+  }
   vibrar(15);
 }
 
@@ -1921,44 +2111,50 @@ function renderCarrinho() {
     elFab.classList.toggle('estourado', estourou);
     elFabTotal.textContent = 'R$ ' + fmt(soma);
     elFabQtd.textContent = qtd;
+    elFab.setAttribute('aria-label', `Abrir carrinho. ${qtd} ${qtd === 1 ? 'item' : 'itens'}, total R$ ${fmt(soma)}`);
   } else {
     elFab.classList.remove('visible');
   }
 
   // Totais do sheet
   elTotal.textContent = 'R$ ' + fmt(soma);
+  elTotal.setAttribute('aria-label', `Total da compra: R$ ${fmt(soma)}`);
   elTotal.classList.toggle('estourado', estourou);
   elEconomia.textContent = economia > 0 ? `💰 Economia: R$ ${fmt(economia)}` : '';
 
   // Barra de progresso da cota
   const pct = Math.min(100, (soma / TETO) * 100);
   elProgressoBarra.style.width = pct + '%';
+  elProgresso.setAttribute('aria-valuenow', String(Math.min(soma, TETO)));
+  elProgresso.setAttribute('aria-valuetext', estourou
+    ? `R$ ${fmt(soma)}, acima da cota de R$ ${fmt(TETO)}`
+    : `R$ ${fmt(soma)} de R$ ${fmt(TETO)}`);
   elProgressoBarra.classList.toggle('alerta', alerta);
   elProgressoBarra.classList.toggle('estourado', estourou);
   elProgressoLabel.textContent = 'R$ ' + fmt(soma);
 
   // Lista
   if (!carrinho.length) {
-    elLista.innerHTML = `<div class="vazio"><span class="emoji">🛒</span>Carrinho vazio</div>`;
+    elLista.innerHTML = `<div class="vazio" role="status"><span class="emoji">🛒</span>Carrinho vazio</div>`;
   } else {
     elLista.innerHTML = carrinho.map(i => {
       const linhaPreco = i.precoEditado
         ? `<span class="preco-editado">✏️ R$ ${fmt(i.preco)} (editado)</span>`
         : `R$ ${fmt(i.preco)} cada`;
       return `
-        <div class="item-carrinho">
+        <div class="item-carrinho" role="listitem">
           ${i.imagem ? `<img src="${escapeHtml(i.imagem)}" alt="" onerror="this.style.display='none'">` : ''}
           <div class="nome">
             <div class="titulo">${escapeHtml(i.nome)}</div>
             <small>${linhaPreco}</small>
           </div>
           <div class="qtd-ctrl">
-            <button data-menos="${escapeHtml(i.ean)}" aria-label="Menos">−</button>
+            <button data-menos="${escapeHtml(i.ean)}" aria-label="Diminuir quantidade de ${escapeHtml(i.nome)}">−</button>
             <span>${i.qtd}</span>
-            <button data-mais="${escapeHtml(i.ean)}" aria-label="Mais">+</button>
+            <button data-mais="${escapeHtml(i.ean)}" aria-label="Aumentar quantidade de ${escapeHtml(i.nome)}">+</button>
           </div>
           <div class="subtotal">R$ ${fmt(i.preco * i.qtd)}</div>
-          <button class="btn-editar-preco" data-editar="${escapeHtml(i.ean)}" aria-label="Editar preço">✏️</button>
+          <button class="btn-editar-preco" data-editar="${escapeHtml(i.ean)}" aria-label="Editar preço de ${escapeHtml(i.nome)}">✏️</button>
         </div>
       `;
     }).join('');
@@ -2021,6 +2217,7 @@ function atualizarAvisoTeto(soma) {
   if (btnRem) {
     btnRem.onclick = () => {
       removerItem(maisCaro.ean);
+      (elFab.classList.contains('visible') ? elFab : elInput).focus();
       toast('Removido: ' + maisCaro.nome.slice(0, 30));
     };
   }
@@ -2043,25 +2240,23 @@ function abrirModalQtd(produto) {
   produtoQtdAtual = produto;
   elModalQtdProduto.textContent = produto.nome;
   elModalQtdInput.value = '1';
-  elModalQtd.classList.add('visivel');
-  setTimeout(() => {
-    elModalQtdInput.focus();
-    elModalQtdInput.select();
-  }, 100);
+  limparErroCampo(elModalQtdInput);
+  abrirDialogo(elModalQtd, elModalQtdInput);
 }
 
 function fecharModalQtd() {
-  elModalQtd.classList.remove('visivel');
+  fecharDialogo(elModalQtd);
   produtoQtdAtual = null;
 }
 
 document.getElementById('modal-qtd-cancelar').onclick = fecharModalQtd;
 document.getElementById('modal-qtd-confirmar').onclick = () => {
   const qtd = lerQuantidade(elModalQtdInput);
-  if (qtd === null) { toast('Digite uma quantidade inteira válida'); return; }
+  if (qtd === null) { mostrarErroCampo(elModalQtdInput, 'Informe uma quantidade inteira maior que zero.'); return; }
   if (produtoQtdAtual) adicionarAoCarrinho(produtoQtdAtual, qtd);
   fecharModalQtd();
 };
+elModalQtdInput.addEventListener('input', () => limparErroCampo(elModalQtdInput));
 elModalQtdInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('modal-qtd-confirmar').click();
 });
@@ -2081,25 +2276,26 @@ function abrirModalPreco(ean) {
   eanPrecoAtual = ean;
   elModalPrecoProduto.textContent = item.nome;
   elModalPrecoInput.value = item.preco.toFixed(2);
-  elModalPreco.classList.add('visivel');
-  setTimeout(() => {
-    elModalPrecoInput.focus();
-    elModalPrecoInput.select();
-  }, 100);
+  limparErroCampo(elModalPrecoInput);
+  abrirDialogo(elModalPreco, elModalPrecoInput);
 }
 
-function fecharModalPreco() {
-  elModalPreco.classList.remove('visivel');
+function fecharModalPreco(focoRetorno) {
+  fecharDialogo(elModalPreco, focoRetorno);
   eanPrecoAtual = null;
 }
 
 document.getElementById('modal-preco-cancelar').onclick = fecharModalPreco;
 document.getElementById('modal-preco-confirmar').onclick = () => {
   const preco = lerPreco(elModalPrecoInput);
-  if (preco === null) { toast('Digite um preço válido com até duas casas decimais'); return; }
-  if (eanPrecoAtual) editarPreco(eanPrecoAtual, preco);
-  fecharModalPreco();
+  if (preco === null) { mostrarErroCampo(elModalPrecoInput, 'Informe um preço válido com até duas casas decimais.'); return; }
+  const ean = eanPrecoAtual;
+  if (ean) editarPreco(ean, preco);
+  const focoRetorno = [...elLista.querySelectorAll('[data-editar]')]
+    .find(botao => botao.dataset.editar === ean);
+  fecharModalPreco(focoRetorno);
 };
+elModalPrecoInput.addEventListener('input', () => limparErroCampo(elModalPrecoInput));
 elModalPrecoInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') document.getElementById('modal-preco-confirmar').click();
 });
@@ -2110,15 +2306,24 @@ elModalPreco.addEventListener('click', e => {
 // ============ SHEET ============
 function abrirSheet() {
   if (!carrinho.length) return;
+  elSheet.inert = false;
+  elSheet.removeAttribute('aria-hidden');
   elSheet.classList.add('aberto');
   elOverlay.classList.add('visible');
+  elFab.setAttribute('aria-expanded', 'true');
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => document.getElementById('sheet-fechar').focus());
 }
 
 function fecharSheet() {
   elSheet.classList.remove('aberto');
   elOverlay.classList.remove('visible');
-  document.body.style.overflow = '';
+  elSheet.setAttribute('aria-hidden', 'true');
+  elSheet.inert = true;
+  elFab.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = document.querySelector('.modal.visivel') ? 'hidden' : '';
+  if (elFab.classList.contains('visible')) elFab.focus();
+  else document.getElementById('btn-manual').focus();
 }
 
 elFab.addEventListener('click', abrirSheet);
@@ -2151,12 +2356,12 @@ function abrirModalManual() {
   elManualNome.value = '';
   elManualPreco.value = '';
   elManualQtd.value = '1';
-  elModalManual.classList.add('visivel');
-  setTimeout(() => elManualNome.focus(), 100);
+  [elManualNome, elManualPreco, elManualQtd].forEach(limparErroCampo);
+  abrirDialogo(elModalManual, elManualNome);
 }
 
 function fecharModalManual() {
-  elModalManual.classList.remove('visivel');
+  fecharDialogo(elModalManual);
 }
 
 document.getElementById('btn-manual').addEventListener('click', abrirModalManual);
@@ -2167,20 +2372,17 @@ document.getElementById('modal-manual-confirmar').addEventListener('click', () =
   const qtd = lerQuantidade(elManualQtd);
 
   if (!nome) {
-    toast('Digite o nome do item');
-    elManualNome.focus();
+    mostrarErroCampo(elManualNome, 'Informe o nome do item.');
     return;
   }
 
   if (preco === null) {
-    toast('Digite um valor válido com até duas casas decimais');
-    elManualPreco.focus();
+    mostrarErroCampo(elManualPreco, 'Informe um preço válido com até duas casas decimais.');
     return;
   }
 
   if (qtd === null) {
-    toast('Digite uma quantidade inteira válida');
-    elManualQtd.focus();
+    mostrarErroCampo(elManualQtd, 'Informe uma quantidade inteira maior que zero.');
     return;
   }
 
@@ -2207,6 +2409,9 @@ document.getElementById('modal-manual-confirmar').addEventListener('click', () =
 elModalManual.addEventListener('click', e => {
   if (e.target === elModalManual) fecharModalManual();
 });
+elManualNome.addEventListener('input', () => limparErroCampo(elManualNome));
+elManualPreco.addEventListener('input', () => limparErroCampo(elManualPreco));
+elManualQtd.addEventListener('input', () => limparErroCampo(elManualQtd));
 elManualNome.addEventListener('keydown', e => {
   if (e.key === 'Enter') elManualPreco.focus();
 });
@@ -2282,11 +2487,11 @@ function abrirCheckout() {
     <div class="msg">${msg}</div>
   `;
 
-  elModalCheckout.classList.add('visivel');
+  abrirDialogo(elModalCheckout);
 }
 
 document.getElementById('co-voltar').onclick = () => {
-  elModalCheckout.classList.remove('visivel');
+  fecharDialogo(elModalCheckout);
 };
 
 document.getElementById('co-share').onclick = async () => {
