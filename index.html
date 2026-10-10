@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#173e32">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1133,6 +1133,106 @@
   .checkout-actions .btn-share { background: var(--forest); }
   .toast { border-radius: 8px; background: var(--forest-deep); }
   .app-footer { color: var(--muted); }
+  .produto .preco-unitario {
+    width: 100%;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .produto .alerta-preco {
+    width: 100%;
+    padding: 5px 7px;
+    border-left: 3px solid var(--coral);
+    border-radius: 4px;
+    background: #fff0ed;
+    color: #922b21;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      min-height: 100dvh;
+      padding-bottom: calc(82px + env(safe-area-inset-bottom));
+    }
+    header {
+      padding-top: calc(10px + env(safe-area-inset-top));
+      padding-bottom: 11px;
+    }
+    .brand-lockup { gap: 9px; margin-bottom: 11px; }
+    .brand-mark { width: 36px; height: 36px; flex-basis: 36px; font-size: 18px; }
+    header h1 { font-size: 22px; }
+    .search-row input { min-height: 48px; font-size: 16px; }
+    .manual-home-btn { min-height: 44px; margin-top: 8px; }
+    main { padding-top: 12px; }
+    .grid-produtos { gap: 8px; }
+    .produto { gap: 8px; padding: 9px; }
+    .produto .meta,
+    .produto .local { overflow-wrap: anywhere; }
+    .carrinho-fab {
+      right: max(10px, env(safe-area-inset-right));
+      bottom: calc(10px + env(safe-area-inset-bottom));
+      max-width: calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right));
+      padding: 12px 14px;
+    }
+    .sheet {
+      max-height: min(88vh, 760px);
+      max-height: min(88dvh, 760px);
+      padding-bottom: calc(env(safe-area-inset-bottom) + 6px);
+    }
+    .sheet-lista { min-height: 0; overscroll-behavior: contain; }
+    .item-carrinho { align-items: center; font-size: 14px; }
+    .item-carrinho .qtd-ctrl button { width: 40px; height: 40px; }
+    .item-carrinho .qtd-ctrl span { min-width: 30px; }
+    .item-carrinho .btn-editar-preco { min-width: 40px; min-height: 40px; }
+    .sheet-footer { padding-bottom: 12px; }
+    .modal {
+      align-items: flex-start;
+      padding: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+    }
+    .modal-box {
+      max-height: calc(100vh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .checkout-resumo .linha { align-items: flex-start; gap: 8px; }
+    .checkout-resumo .linha > span:last-child { max-width: 65%; text-align: right; overflow-wrap: anywhere; }
+    .checkout-actions { grid-template-columns: 1fr; }
+    .checkout-actions .btn-voltar { grid-column: auto; }
+    .checkout-actions button { min-height: 48px; }
+  }
+
+  @media (max-width: 380px) {
+    .produto {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) 42px;
+      align-items: start;
+      gap: 8px;
+      padding: 9px;
+    }
+    .produto img { width: 52px; height: 52px; }
+    .produto .info { min-width: 0; }
+    .produto .nome { font-size: 13px; -webkit-line-clamp: 4; }
+    .produto .acoes {
+      width: 42px;
+      flex-direction: column;
+      align-self: start;
+      gap: 6px;
+    }
+    .produto .add-btn,
+    .produto .add-qtd-btn { width: 42px; min-height: 42px; }
+    .produto .add-btn { flex: 0 0 42px; font-size: 22px; }
+    .produto .add-qtd-btn { font-size: 11px; }
+    .produto .preco-row { column-gap: 6px; row-gap: 4px; }
+    .produto .preco { font-size: 16px; }
+    .produto .preco-unitario,
+    .produto .alerta-preco { font-size: 10px; }
+    .item-carrinho { padding-top: 10px; padding-bottom: 10px; }
+    .item-carrinho .nome { flex-basis: calc(100% - 52px); }
+    .item-carrinho .subtotal { min-width: 68px; }
+    .totais .valor { font-size: 21px; }
+  }
 </style>
 </head>
 <body>
@@ -1302,6 +1402,7 @@ const LOJA_NOME = 'Mateus Mais Express';
 const LIMITE = 20;
 const CACHE_MIN = 10;
 const TETO = 900;
+const FATOR_PRECO_SUSPEITO = 3;
 const CACHE_STORAGE_KEY = 'carrinho-mateus-buscas';
 
 // ============ ESTADO ============
@@ -1416,6 +1517,9 @@ async function buscarAPI(termo) {
         ean: String(p.barcode || p.objectID || ''),
         nome: String(p.name || 'Sem nome'),
         marca: String(p.brand || ''),
+        categoria: String(p.departament_name || p.category || ''),
+        medida: Number(p.measure) || 0,
+        tipoMedida: String(p.measure_type || ''),
         preco: precoFinal,
         precoCheio,
         emPromocao,
@@ -1472,6 +1576,97 @@ function lerPreco(input) {
   if (!input.checkValidity()) return null;
   const preco = parseFloat(String(input.value).replace(',', '.'));
   return Number.isFinite(preco) && preco >= 0 ? emCentavos(preco) / 100 : null;
+}
+
+function unidadesPorPacote(nome) {
+  const match = String(nome || '').match(/(?:^|\D)(\d+)\s*[x×]\s*\d+(?:[.,]\d+)?\s*(?:kg|g|ml|l|un(?:idades?)?)\b/i);
+  const unidades = Number(match && match[1]);
+  return Number.isSafeInteger(unidades) && unidades > 1 ? unidades : 1;
+}
+
+function priorizarProdutosUnitarios(produtos) {
+  return produtos
+    .map(produto => ({ ...produto, unidadesPacote: unidadesPorPacote(produto.nome) }))
+    .sort((a, b) => a.unidadesPacote - b.unidadesPacote);
+}
+
+function normalizarMedidaPreco(produto) {
+  let quantidade = Number(produto.medida);
+  let tipo = String(produto.tipoMedida || '').trim().toUpperCase();
+  if (!(quantidade > 0) || !tipo) {
+    const match = String(produto.unidade || '').match(/([\d.,]+)\s*(KG|ML|L|G|UNIDADES?|UNID|UND|UN)\b/i);
+    if (!match) return null;
+    quantidade = parseFloat(match[1].replace(',', '.'));
+    tipo = match[2].toUpperCase();
+  }
+
+  if (!Number.isFinite(quantidade) || quantidade <= 0) return null;
+  if (tipo === 'ML') return { quantidade: quantidade / 1000, unidade: 'L' };
+  if (tipo === 'G') return { quantidade: quantidade / 1000, unidade: 'kg' };
+  if (tipo === 'L') return { quantidade, unidade: 'L' };
+  if (tipo === 'KG') return { quantidade, unidade: 'kg' };
+  if (['UN', 'UND', 'UNID', 'UNIDADE', 'UNIDADES'].includes(tipo)) {
+    return { quantidade, unidade: 'un.' };
+  }
+  return null;
+}
+
+function mediana(valores) {
+  const ordenados = valores.filter(Number.isFinite).sort((a, b) => a - b);
+  if (!ordenados.length) return null;
+  const meio = Math.floor(ordenados.length / 2);
+  return ordenados.length % 2
+    ? ordenados[meio]
+    : (ordenados[meio - 1] + ordenados[meio]) / 2;
+}
+
+function analisarPrecos(produtos) {
+  const avaliados = produtos.map(produto => {
+    const medida = normalizarMedidaPreco(produto);
+    return {
+      ...produto,
+      unidadePreco: medida && medida.unidade,
+      precoPorUnidade: medida ? produto.preco / medida.quantidade : null,
+    };
+  });
+
+  return avaliados.map(produto => {
+    if (!produto.unidadePreco || !(produto.precoPorUnidade > 0)) {
+      return { ...produto, precoReferencia: null, precoSuspeito: false };
+    }
+
+    const comparaveis = avaliados.filter(outro =>
+      outro.ean !== produto.ean &&
+      outro.unidadePreco === produto.unidadePreco &&
+      outro.precoPorUnidade > 0
+    );
+    const marca = String(produto.marca || '').trim().toLocaleLowerCase('pt-BR');
+    const categoria = String(produto.categoria || '').trim().toLocaleLowerCase('pt-BR');
+    const mesmaMarcaCategoria = marca && categoria
+      ? comparaveis.filter(outro =>
+        outro.marca.trim().toLocaleLowerCase('pt-BR') === marca &&
+        String(outro.categoria || '').trim().toLocaleLowerCase('pt-BR') === categoria
+      )
+      : [];
+    const mesmaMarca = marca
+      ? comparaveis.filter(outro => outro.marca.trim().toLocaleLowerCase('pt-BR') === marca)
+      : [];
+    const mesmaCategoria = categoria
+      ? comparaveis.filter(outro => outro.categoria.trim().toLocaleLowerCase('pt-BR') === categoria)
+      : [];
+    const grupo = mesmaMarcaCategoria.length
+      ? mesmaMarcaCategoria
+      : mesmaMarca.length
+        ? mesmaMarca
+        : mesmaCategoria;
+    const precoReferencia = mediana(grupo.map(outro => outro.precoPorUnidade));
+
+    return {
+      ...produto,
+      precoReferencia,
+      precoSuspeito: precoReferencia !== null && produto.precoPorUnidade > precoReferencia * FATOR_PRECO_SUSPEITO,
+    };
+  });
 }
 
 function escapeHtml(s) {
@@ -1535,16 +1730,19 @@ function renderResultados(produtos) {
     return;
   }
 
-  const cards = produtos.map(p => `
+  const cards = analisarPrecos(priorizarProdutosUnitarios(produtos)).map(p => `
     <div class="produto">
       ${p.imagem
         ? `<img src="${escapeHtml(p.imagem)}" alt="" loading="lazy" onerror="this.style.opacity=.3">`
         : `<div style="width:80px;height:80px;background:#f9fafb;border-radius:10px;flex-shrink:0;"></div>`}
       <div class="info">
         <div class="nome">${escapeHtml(p.nome)}</div>
-        <div class="meta">${escapeHtml(p.marca)}${p.unidade ? ' · ' + escapeHtml(p.unidade) : ''}</div>
+        <div class="meta">${escapeHtml(p.marca)}${p.unidade ? ' · ' + escapeHtml(p.unidade) : ''}${p.unidadesPacote > 1 ? ` · pacote com ${p.unidadesPacote}` : ''}</div>
         <div class="preco-row">
           <span class="preco">R$ ${fmt(p.preco)}</span>
+          ${p.precoPorUnidade ? `<span class="preco-unitario">R$ ${fmt(p.precoPorUnidade)} / ${escapeHtml(p.unidadePreco)}</span>` : ''}
+          ${p.unidadesPacote > 1 ? `<span class="preco-unitario">R$ ${fmt(p.preco / p.unidadesPacote)} por unidade</span>` : ''}
+          ${p.precoSuspeito ? `<span class="alerta-preco">⚠ Preço suspeito: ${(p.precoPorUnidade / p.precoReferencia).toFixed(1).replace('.', ',')}× a referência de R$ ${fmt(p.precoReferencia)}/${escapeHtml(p.unidadePreco)}</span>` : ''}
           ${p.emPromocao ? `
             <span class="preco-cheio">R$ ${fmt(p.precoCheio)}</span>
             <span class="badge">-${p.desconto}%</span>
