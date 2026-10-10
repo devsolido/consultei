@@ -176,13 +176,14 @@ POST https://app.mateusmais.com.br/api/products/internal/v1/service/autocomplete
 - [ ] Agrupamento por categoria/corredor (para otimizar a rota no mercado)
 
 ### 6.3 Persistência
-- [ ] Carrinho salvo localmente (localStorage/IndexedDB) — não perder se fechar o app
+- [x] Carrinho salvo localmente (localStorage) — não perder se fechar o app
 - [ ] Histórico de compras
-- [ ] Cache de preços por ~10 min (dados são atualizados agora, conforme `updated_at`)
+- [x] Cache de preços por ~10 min; as últimas 30 buscas ficam persistidas para uso offline
 
 ### 6.4 Modo offline
-- [ ] Preços da última consulta ficam disponíveis sem internet
-- [ ] Fila de operações para sincronizar quando voltar conexão
+- [x] Consultas já realizadas ficam disponíveis sem internet
+- [x] Interface e bibliotecas do PDF são armazenadas pelo service worker após o primeiro acesso online via HTTP/HTTPS
+- Não há fila de sincronização: carrinho e alterações são locais e não dependem de servidor
 
 ---
 

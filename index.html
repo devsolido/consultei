@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#155dfc">
+<meta name="theme-color" content="#173e32">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Carrinho">
+<meta name="apple-mobile-web-app-title" content="Rota &amp; Conta">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="description" content="Carrinho inteligente com preços do Mateus Mais">
-<title>Carrinho Mateus Mais</title>
+<meta name="description" content="Rota &amp; Conta: sua lista de compras do Mateus Mais">
+<title>Rota &amp; Conta</title>
 
 <!-- jsPDF + AutoTable para geração do PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script>
@@ -969,6 +969,14 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+  .app-footer {
+    padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+    color: #6b7280;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
   /* ==================== SKELETON ==================== */
   .skeleton {
     background: #fff;
@@ -1005,6 +1013,126 @@
     animation: spin .8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  :root {
+    color-scheme: light;
+    --forest: #173e32;
+    --forest-deep: #102f27;
+    --lime: #d8ef78;
+    --coral: #d95f3f;
+    --paper: #f2f6ef;
+    --ink: #1c2d27;
+    --muted: #68776f;
+    --line: #dce5da;
+  }
+  html, body {
+    font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+    background-color: var(--paper);
+    background-image: repeating-linear-gradient(0deg, transparent 0 31px, rgba(23,62,50,.025) 31px 32px);
+    color: var(--ink);
+  }
+  header {
+    background: var(--forest);
+    border-bottom: 4px solid var(--lime);
+    box-shadow: 0 5px 18px rgba(16,47,39,.16);
+    padding-top: calc(14px + env(safe-area-inset-top));
+    padding-bottom: 16px;
+  }
+  .header-inner { max-width: 980px; }
+  .brand-lockup { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 42px;
+    border: 1px solid rgba(216,239,120,.5);
+    border-radius: 9px;
+    color: var(--lime);
+    font: 700 21px Georgia, "Times New Roman", serif;
+  }
+  .brand-kicker {
+    display: block;
+    margin-bottom: 2px;
+    color: #c3d4c7;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  header h1 {
+    margin: 0;
+    color: #fff;
+    font: 700 25px/1 Georgia, "Times New Roman", serif;
+  }
+  header h1 span { color: var(--lime); font: inherit; }
+  .search-row { gap: 9px; }
+  .search-row input {
+    min-width: 0;
+    border: 1px solid #dce5da;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.08);
+  }
+  .search-row input:focus { box-shadow: 0 0 0 3px rgba(216,239,120,.45); }
+  .search-row .clear { border-radius: 6px; }
+  .manual-home-btn {
+    margin-top: 9px;
+    background: var(--lime);
+    color: var(--forest-deep);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+  main { max-width: 1020px; padding-top: 18px; }
+  .status { color: var(--muted); }
+  .grid-produtos { gap: 11px; }
+  .produto {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(23,62,50,.045);
+  }
+  .produto img { background: #f1f5eb; border-radius: 6px; }
+  .produto .nome { color: var(--ink); }
+  .produto .preco { color: var(--coral); }
+  .produto .badge { background: #fff0df; color: #9b4a2e; border-radius: 4px; }
+  .produto .add-btn {
+    background: var(--forest);
+    border-radius: 7px;
+  }
+  .produto .add-btn:active { background: var(--forest-deep); }
+  .produto .add-qtd-btn { color: var(--forest); border-color: var(--forest); border-radius: 7px; }
+  .carrinho-fab {
+    background: var(--coral);
+    border-radius: 8px;
+    box-shadow: 0 7px 20px rgba(104,45,29,.24);
+  }
+  .carrinho-fab .badge-qtd { background: var(--forest-deep); }
+  .sheet { border-radius: 12px 12px 0 0; }
+  .sheet-header { border-color: var(--line); }
+  .sheet-header h2 { color: var(--forest); font-family: Georgia, "Times New Roman", serif; }
+  .sheet-footer { border-color: var(--line); }
+  .totais .valor { color: var(--forest); }
+  .progresso-cota .barra .preenchido { background: var(--forest); }
+  .btn-limpar { background: #edf2e9; color: var(--forest); }
+  .btn-finalizar { background: var(--forest); }
+  .manual-home-btn:active, .btn-finalizar:active { filter: brightness(.92); }
+  .modal-box {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: 0 18px 48px rgba(16,47,39,.2);
+  }
+  .modal-box h3 { color: var(--forest); font-family: Georgia, "Times New Roman", serif; }
+  .modal-box input, .modal-box textarea { border-radius: 7px; border-color: var(--line); }
+  .modal-box input:focus, .modal-box textarea:focus { border-color: var(--forest); }
+  .modal-box .btn-cancelar { background: #edf2e9; color: var(--forest); }
+  .modal-box .btn-confirmar { background: var(--forest); }
+  .checkout-resumo { background: #f2f6ef; border-radius: 8px; }
+  .checkout-resumo .linha.total .valor { color: var(--coral); }
+  .cota-box { border-color: var(--line); border-radius: 8px; }
+  .checkout-actions .btn-pdf { background: var(--coral); }
+  .checkout-actions .btn-share { background: var(--forest); }
+  .toast { border-radius: 8px; background: var(--forest-deep); }
+  .app-footer { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -1012,7 +1140,13 @@
 <!-- ==================== HEADER ==================== -->
 <header>
   <div class="header-inner">
-    <h1><span>🛒</span> Carrinho Mateus Mais</h1>
+    <div class="brand-lockup">
+      <div class="brand-mark" aria-hidden="true">R</div>
+      <div>
+        <span class="brand-kicker">MATEUS MAIS · MARABÁ</span>
+        <h1>Rota <span>&amp;</span> Conta</h1>
+      </div>
+    </div>
     <div class="search-row">
       <input id="busca" type="search" placeholder="Buscar produto..." autocomplete="off" enterkeyhint="search" inputmode="search">
       <button class="clear" id="btn-limpar-busca" aria-label="Limpar busca">✕</button>
@@ -1133,9 +1267,6 @@
     <h3>✅ Finalizar compra</h3>
     <div class="subtitulo">Confira os dados e gere o comprovante em PDF</div>
 
-    <label for="co-nome">Nome (opcional)</label>
-    <input id="co-nome" type="text" placeholder="Seu nome" autocomplete="name">
-
     <label for="co-obs">Observações (opcional)</label>
     <textarea id="co-obs" placeholder="Ex: compra do mês, lista da semana..."></textarea>
 
@@ -1151,10 +1282,11 @@
 </div>
 
 <div class="toast" id="toast"></div>
+<footer class="app-footer">Feito por Igor Veras Morais - IFPA - Campus Marabá Industrial</footer>
 
 <script>
 /* ================================================================
-   CARRINHO MATEUS MAIS
+  ROTA & CONTA
    ----------------------------------------------------------------
    - Busca via Meilisearch (endpoint público do site)
    - Carrinho com edição de preço e quantidade
@@ -1166,18 +1298,43 @@
 const ENDPOINT = 'https://app.mateusmais.com.br/api/products/internal/v1/service/*/queries';
 const INDEX = 'SHOWCASE_catalog_product_api_index_PROD';
 const LOJA_PADRAO = '14ae828b-491f-42fc-8247-5089f6613750';
-const LOJA_NOME = 'Mix Mateus Cidade Nova';
+const LOJA_NOME = 'Mateus Mais Express';
 const LIMITE = 20;
 const CACHE_MIN = 10;
 const TETO = 900;
+const CACHE_STORAGE_KEY = 'carrinho-mateus-buscas';
 
 // ============ ESTADO ============
 const STORAGE_KEY = 'carrinho-mateus';
 
 let carrinho = carregarCarrinho();
 let ultimoTermo = '';
-const cache = {};
+const cache = carregarCacheBusca();
 let ultimoEstadoTeto = '';
+
+function carregarCacheBusca() {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CACHE_STORAGE_KEY) || '{}');
+    if (!dados || typeof dados !== 'object' || Array.isArray(dados)) return {};
+    const validos = Object.entries(dados).filter(([termo, entrada]) =>
+      termo.trim() && entrada && Number.isFinite(entrada.t) && Array.isArray(entrada.dados) &&
+      entrada.dados.every(produto => produto && typeof produto.ean === 'string' && Number.isFinite(produto.preco))
+    );
+    return Object.fromEntries(validos.slice(-30));
+  } catch (e) {
+    console.warn('Cache de buscas indisponível', e);
+    return {};
+  }
+}
+
+function salvarCacheBusca() {
+  try {
+    const recentes = Object.entries(cache).slice(-30);
+    localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(Object.fromEntries(recentes)));
+  } catch (e) {
+    console.warn('Falha ao salvar cache de buscas', e);
+  }
+}
 
 function carregarCarrinho() {
   try {
@@ -1185,7 +1342,15 @@ function carregarCarrinho() {
     if (!raw) return [];
     const dados = JSON.parse(raw);
     if (!Array.isArray(dados)) return [];
-    return dados.filter(i => i && i.ean && i.nome && typeof i.preco === 'number');
+    return dados
+      .filter(i => i && i.ean && i.nome && Number.isFinite(i.preco) && i.preco >= 0 && Number.isInteger(i.qtd) && i.qtd > 0)
+      .map(i => ({
+        ...i,
+        preco: emCentavos(i.preco) / 100,
+        ...(typeof i.precoCheio === 'number'
+          ? { precoCheio: emCentavos(i.precoCheio) / 100 }
+          : {}),
+      }));
   } catch (e) {
     console.warn('Carrinho corrompido, começando vazio', e);
     return [];
@@ -1203,7 +1368,7 @@ function salvarCarrinho() {
 // ============ API ============
 async function buscarAPI(termo) {
   const agora = Date.now();
-  if (cache[termo] && agora - cache[termo].t < CACHE_MIN * 60000) {
+  if (cache[termo] && (agora - cache[termo].t < CACHE_MIN * 60000 || !navigator.onLine)) {
     return cache[termo].dados;
   }
 
@@ -1218,23 +1383,30 @@ async function buscarAPI(termo) {
     query: termo,
   }).toString();
 
-  const resp = await fetch(ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      requests: [{ title: 'express', params, indexName: INDEX }],
-      service: 'meilisearch',
-    }),
-  });
+  let data;
+  try {
+    const resp = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requests: [{ title: 'express', params, indexName: INDEX }],
+        service: 'meilisearch',
+      }),
+    });
 
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-
-  const data = await resp.json();
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    data = await resp.json();
+  } catch (e) {
+    if (cache[termo]) return cache[termo].dados;
+    throw e;
+  }
 
   const produtos = (data.results || []).flatMap(g =>
     (g.hits || []).map(p => {
-      const precoCheio = Number(p.price) || 0;
-      const precoFinal = Number(p.sale_price) > 0 ? Number(p.sale_price) : precoCheio;
+      const precoCheio = emCentavos(p.price) / 100;
+      const precoFinal = Number(p.sale_price) > 0
+        ? emCentavos(p.sale_price) / 100
+        : precoCheio;
       const emPromocao = precoFinal < precoCheio;
       const desconto = emPromocao
         ? Math.round((1 - precoFinal / precoCheio) * 100)
@@ -1258,6 +1430,7 @@ async function buscarAPI(termo) {
   ).filter(p => p.ean && p.preco > 0);
 
   cache[termo] = { t: agora, dados: produtos };
+  salvarCacheBusca();
   return produtos;
 }
 
@@ -1279,8 +1452,26 @@ const elProgressoLabel = document.getElementById('progresso-label');
 
 // ============ HELPERS ============
 function fmt(n) {
-  const v = Number(n) || 0;
+  const v = emCentavos(n) / 100;
   return v.toFixed(2).replace('.', ',');
+}
+
+function emCentavos(valor) {
+  const numero = Number(valor);
+  return Number.isFinite(numero)
+    ? Math.round((numero + Number.EPSILON * Math.abs(numero)) * 100)
+    : 0;
+}
+
+function lerQuantidade(input) {
+  const qtd = Number(input.value);
+  return Number.isInteger(qtd) && qtd >= 1 ? qtd : null;
+}
+
+function lerPreco(input) {
+  if (!input.checkValidity()) return null;
+  const preco = parseFloat(String(input.value).replace(',', '.'));
+  return Number.isFinite(preco) && preco >= 0 ? emCentavos(preco) / 100 : null;
 }
 
 function escapeHtml(s) {
@@ -1451,7 +1642,9 @@ async function doBusca(termo, forcar = false) {
     if (elInput.value.trim() !== termo) return;
     renderResultados(produtos);
   } catch (e) {
-    renderErro('Erro ao buscar: ' + e.message);
+    renderErro(navigator.onLine
+      ? 'Erro ao buscar: ' + e.message
+      : 'Sem conexão. Esta busca ainda não foi salva neste aparelho.');
   }
 }
 
@@ -1506,21 +1699,22 @@ function limparCarrinho() {
 }
 
 function calcTotais() {
-  let soma = 0, economia = 0, qtd = 0;
+  let somaCentavos = 0, economiaCentavos = 0, qtd = 0;
   for (const i of carrinho) {
-    soma += i.preco * i.qtd;
+    const precoCentavos = emCentavos(i.preco);
+    somaCentavos += precoCentavos * i.qtd;
     qtd += i.qtd;
     if (i.emPromocao && !i.precoEditado) {
-      economia += (i.precoCheio - i.preco) * i.qtd;
+      economiaCentavos += (emCentavos(i.precoCheio) - precoCentavos) * i.qtd;
     }
   }
-  return { soma, economia, qtd };
+  return { soma: somaCentavos / 100, economia: economiaCentavos / 100, qtd };
 }
 
 // ============ RENDER CARRINHO ============
 function renderCarrinho() {
   const { soma, economia, qtd } = calcTotais();
-  const estourou = soma >= TETO;
+  const estourou = soma > TETO;
   const alerta = soma >= TETO * 0.9 && !estourou;
 
   // FAB
@@ -1584,7 +1778,7 @@ function renderCarrinho() {
 
 // ============ AVISO DE TETO ============
 function atualizarAvisoTeto(soma) {
-  const estourou = soma >= TETO;
+  const estourou = soma > TETO;
 
   if (!estourou) {
     if (ultimoEstadoTeto === 'estourado') {
@@ -1665,8 +1859,8 @@ function fecharModalQtd() {
 
 document.getElementById('modal-qtd-cancelar').onclick = fecharModalQtd;
 document.getElementById('modal-qtd-confirmar').onclick = () => {
-  const qtd = parseInt(elModalQtdInput.value, 10);
-  if (!qtd || qtd < 1) { toast('Digite uma quantidade válida'); return; }
+  const qtd = lerQuantidade(elModalQtdInput);
+  if (qtd === null) { toast('Digite uma quantidade inteira válida'); return; }
   if (produtoQtdAtual) adicionarAoCarrinho(produtoQtdAtual, qtd);
   fecharModalQtd();
 };
@@ -1703,8 +1897,8 @@ function fecharModalPreco() {
 
 document.getElementById('modal-preco-cancelar').onclick = fecharModalPreco;
 document.getElementById('modal-preco-confirmar').onclick = () => {
-  const preco = parseFloat(String(elModalPrecoInput.value).replace(',', '.'));
-  if (isNaN(preco) || preco < 0) { toast('Digite um preço válido'); return; }
+  const preco = lerPreco(elModalPrecoInput);
+  if (preco === null) { toast('Digite um preço válido com até duas casas decimais'); return; }
   if (eanPrecoAtual) editarPreco(eanPrecoAtual, preco);
   fecharModalPreco();
 };
@@ -1771,8 +1965,8 @@ document.getElementById('btn-manual').addEventListener('click', abrirModalManual
 document.getElementById('modal-manual-cancelar').addEventListener('click', fecharModalManual);
 document.getElementById('modal-manual-confirmar').addEventListener('click', () => {
   const nome = elManualNome.value.trim();
-  const preco = parseFloat(String(elManualPreco.value).replace(',', '.'));
-  const qtd = parseInt(elManualQtd.value, 10);
+  const preco = lerPreco(elManualPreco);
+  const qtd = lerQuantidade(elManualQtd);
 
   if (!nome) {
     toast('Digite o nome do item');
@@ -1780,14 +1974,14 @@ document.getElementById('modal-manual-confirmar').addEventListener('click', () =
     return;
   }
 
-  if (Number.isNaN(preco) || preco < 0) {
-    toast('Digite um valor válido');
+  if (preco === null) {
+    toast('Digite um valor válido com até duas casas decimais');
     elManualPreco.focus();
     return;
   }
 
-  if (!Number.isInteger(qtd) || qtd < 1) {
-    toast('Digite uma quantidade válida');
+  if (qtd === null) {
+    toast('Digite uma quantidade inteira válida');
     elManualQtd.focus();
     return;
   }
@@ -1849,7 +2043,7 @@ function abrirCheckout() {
     ${economia > 0 ? `<div class="linha"><span>💰 Economia</span><span style="color:#059669">-R$ ${fmt(economia)}</span></div>` : ''}
     <div class="linha total">
       <span>Total</span>
-      <span class="valor ${soma >= TETO ? 'estourado' : ''}">R$ ${fmt(soma)}</span>
+      <span class="valor ${soma > TETO ? 'estourado' : ''}">R$ ${fmt(soma)}</span>
     </div>
   `;
 
@@ -1857,10 +2051,14 @@ function abrirCheckout() {
   const restante = TETO - soma;
   let status, statusLabel, msg;
 
-  if (soma >= TETO) {
+  if (soma > TETO) {
     status = 'estourada';
     statusLabel = '🚨 Estourada';
     msg = `Você passou <strong>R$ ${fmt(soma - TETO)}</strong> do teto.`;
+  } else if (soma >= TETO) {
+    status = 'alerta';
+    statusLabel = '🎯 No limite';
+    msg = 'Você atingiu exatamente o limite da cota.';
   } else if (soma >= TETO * 0.9) {
     status = 'alerta';
     statusLabel = '⚠️ Atenção';
@@ -1899,11 +2097,13 @@ document.getElementById('co-share').onclick = async () => {
     .map(i => `${i.qtd}x ${i.nome} — R$ ${fmt(i.preco * i.qtd)}${i.precoEditado ? ' *' : ''}`)
     .join('\n');
 
-  const statusCota = soma >= TETO
-    ? '🚨 estourou'
-    : soma >= TETO * 0.9
-      ? '⚠️ perto do limite'
-      : '✅ segura';
+  const statusCota = soma > TETO
+    ? `🚨 passou R$ ${fmt(soma - TETO)}`
+    : soma >= TETO
+      ? '🎯 atingiu o limite exato'
+      : soma >= TETO * 0.9
+        ? '⚠️ perto do limite'
+        : '✅ segura';
 
   const texto =
     `🛒 *Resumo da compra*\n` +
@@ -1918,7 +2118,7 @@ document.getElementById('co-share').onclick = async () => {
 
   if (navigator.share) {
     try {
-      await navigator.share({ title: 'Carrinho Mateus Mais', text: texto });
+      await navigator.share({ title: 'Rota & Conta', text: texto });
     } catch (e) { /* usuário cancelou */ }
   } else if (navigator.clipboard) {
     try {
@@ -1954,36 +2154,33 @@ function gerarPDF() {
     const dataStr = agora.toLocaleDateString('pt-BR');
     const horaStr = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-    const nome = document.getElementById('co-nome').value.trim();
     const obs = document.getElementById('co-obs').value.trim();
 
     // ----- Cabeçalho -----
-    doc.setFillColor(21, 93, 252);
+    doc.setFillColor(23, 62, 50);
     doc.rect(0, 0, 210, 30, 'F');
 
     doc.setTextColor(255, 255, 255);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(18);
-    doc.text('Carrinho Mateus Mais', 14, 14);
+    doc.text('Rota & Conta', 14, 14);
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.text('Comprovante de compra', 14, 21);
     doc.text(`${dataStr} às ${horaStr}`, 14, 26.5);
 
-    // ----- Dados do cliente -----
+    // ----- Dados da compra -----
     let y = 40;
     doc.setTextColor(17, 24, 39);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
-    doc.text('Dados do cliente', 14, y);
+    doc.text('Dados da compra', 14, y);
     y += 6;
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(75, 85, 99);
-    doc.text(`Nome: ${nome || '(não informado)'}`, 14, y);
-    y += 5;
     doc.text(`Loja: ${LOJA_NOME}`, 14, y);
     y += 8;
 
@@ -2002,7 +2199,7 @@ function gerarPDF() {
       body,
       theme: 'striped',
       headStyles: {
-        fillColor: [21, 93, 252],
+        fillColor: [23, 62, 50],
         textColor: 255,
         fontStyle: 'bold',
         fontSize: 10,
@@ -2032,7 +2229,7 @@ function gerarPDF() {
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(15);
-    doc.setTextColor(21, 93, 252);
+    doc.setTextColor(217, 95, 63);
     doc.text(`Total: R$ ${fmt(soma)}`, 14, yFin);
     yFin += 8;
 
@@ -2049,9 +2246,12 @@ function gerarPDF() {
     const pct = Math.min(100, (soma / TETO) * 100);
 
     let corCota, txtCota;
-    if (soma >= TETO) {
+    if (soma > TETO) {
       corCota = [220, 38, 38];
       txtCota = `Passou R$ ${fmt(soma - TETO)} do teto`;
+    } else if (soma >= TETO) {
+      corCota = [245, 158, 11];
+      txtCota = 'Limite da cota atingido';
     } else if (soma >= TETO * 0.9) {
       corCota = [245, 158, 11];
       txtCota = `Faltam R$ ${fmt(TETO - soma)} para o teto`;
@@ -2091,10 +2291,11 @@ function gerarPDF() {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.text(
-      'Gerado automaticamente pelo Carrinho Mateus Mais — uso pessoal',
+      'Gerado automaticamente pelo Rota & Conta — uso pessoal',
       14,
-      pageH - 8
+      pageH - 15
     );
+    doc.text('Feito por Igor Veras Morais - IFPA - Campus Marabá Industrial', 14, pageH - 9);
     if (carrinho.some(i => i.precoEditado)) {
       doc.text('* preço ajustado manualmente', 14, pageH - 4);
     }
@@ -2115,7 +2316,15 @@ function gerarPDF() {
 
 // ============ INIT ============
 renderCarrinho();
-console.log('%c🛒 Carrinho Mateus Mais carregado', 'color:#155dfc;font-weight:bold;font-size:14px');
+console.log('%cRota & Conta carregado', 'color:#173e32;font-weight:bold;font-size:14px');
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(e => {
+      console.warn('Não foi possível ativar o modo offline', e);
+    });
+  });
+}
 </script>
 </body>
 </html>
